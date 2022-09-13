@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*TODO 建構 NavBar*/
+header {
+  background-color: darkgrey;
+  padding: 1rem;
+}
+/* TODO NavBar 內容設定 */
+header a {
+  color: azure; /* TODO 超連結字體顏色 */
+  font-weight: bold;/* TODO 超連結字體變粗 */
+  text-decoration: none;/* TODO 取消超連結底線 */
+}
