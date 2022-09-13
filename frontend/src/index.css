@@ -17,3 +17,27 @@ header a {
   font-weight: bold;/* TODO 超連結字體變粗 */
   text-decoration: none;/* TODO 取消超連結底線 */
 }
+
+main {
+  padding: 5rem; /* TODO 標題位置 */
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  border: 1px lightslategrey solid;
+  margin: 1rem;
+}
+
+.product img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.product-info {
+  padding: 1rem; /* TODO 卡片間隔 */
+}
