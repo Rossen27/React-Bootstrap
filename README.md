@@ -21,3 +21,9 @@
   8. npm install nodemon --save-dev
   9. 在 package.json 的 scripts 內加入 "start": "nodemon server.js",
   10. 以後要執行後端程式只需要下 npm start 即可，當伺服器運作時內容更改也會更著重新整理。
+8. 利用 axios 連接前後端
+  1. set proxy in package.json
+  2. npm i axios
+  3. 使用 state hook
+  4. 使用 effect hook
+  5. 使用 reducer hook
