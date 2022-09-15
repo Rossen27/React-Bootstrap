@@ -1,4 +1,4 @@
-# MERN React + Node 購物網站
+#  React + Node 購物網站
 
 # Lessons
 1. 介紹
