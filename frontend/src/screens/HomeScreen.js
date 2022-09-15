@@ -4,7 +4,7 @@ import data from '../data';
 function HomeScreen() {
   return (
     <div>
-      <h1>Featured Products</h1>
+      <h1>熱門商品</h1>
       <div className="products">
         {data.products.map((product) => (
           <div className="product" key={product.slug}>
