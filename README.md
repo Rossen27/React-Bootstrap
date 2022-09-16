@@ -54,3 +54,8 @@ Lessons
 2. 使用 spinner 組件
 3. 創建各類訊息組件
 4. 創建 utils.js 來設定接取 Error 錯誤訊息
+## 14. 購物車前端導覽效果列設定
+1. 創建 React Context
+2. define reducer
+3. 建立購物車效果
+4. 導入購物車效果
