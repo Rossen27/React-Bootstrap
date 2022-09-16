@@ -31,3 +31,7 @@
   1. define reducer
   2. update fetch data
   3. get state from usReducer
+10. 加入 Bootstrap UI
+  1. npm install react-bootstrap bootstrap --legacy-peer-deps
+  2. npm i react-router-bootstrap --legacy-peer-deps
+  3. Update App.js
