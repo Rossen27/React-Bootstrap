@@ -62,3 +62,7 @@ Lessons
 ## 15. 前後後端購物車資料串接
 1. check exist item in the cart
 2. check count in stock in backend
+## 16. 建立購物車頁面
+1. 建立 2 columns
+2. display items list
+3. create action column
