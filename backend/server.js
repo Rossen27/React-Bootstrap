@@ -15,7 +15,15 @@ app.get('/api/products/slug/:slug', (req, res) => {
     res.status(404).send({message:'無此商品'})
   }
 });
-
+// 購物車頁面
+app.get('/api/products/:id', (req, res) => {
+  const product = data.products.find((x) => x._id === req.params.id);
+  if(product) {
+    res.send(product);
+  } else {
+    res.status(404).send({message:'無此商品'})
+  }
+});
 // 設定端口
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

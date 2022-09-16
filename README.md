@@ -59,3 +59,6 @@ Lessons
 2. define reducer
 3. 建立購物車效果
 4. 導入購物車效果
+## 15. 前後後端購物車資料串接
+1. check exist item in the cart
+2. check count in stock in backend

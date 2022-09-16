@@ -26,7 +26,7 @@ function App() {
               <i class="bi bi-cart2"></i>
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg="danger">
-                    {cart.cartItems.length}
+                    {cart.cartItems.reduce((a, c) => c.quantity, 0)}
                   </Badge>
                 )}
               </Link>
