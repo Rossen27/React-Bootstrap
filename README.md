@@ -35,3 +35,7 @@
   1. npm install react-bootstrap bootstrap --legacy-peer-deps
   2. npm i react-router-bootstrap --legacy-peer-deps
   3. Update App.js
+11. 使用 Bootstrap 的 Card 功能以及增加星星評分功能
+  1. 創建 Rating component
+  2. 創建 Product component
+  3. 使用 Rating component 在 Product component
