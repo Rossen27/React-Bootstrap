@@ -1,10 +1,12 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 // import data from '../data';
 
 const reducer = (state, action) => {
@@ -49,10 +51,11 @@ function HomeScreen() {
       <h1>熱門商品</h1>
       <div className="products">
         {
-          loading? (<div>loading....</div>)
-          :
-          error? (<div>{error}</div>)
-          :(
+          loading? (
+            <LoadingBox />
+            ) : error ? (
+              <MessageBox variant="danger">{error}</MessageBox>
+            ) : (
           <Row>
             {
               products.map((product) => (

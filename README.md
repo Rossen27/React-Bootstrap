@@ -49,3 +49,8 @@ Lessons
 1. npm install react-helmet-async --legacy-peer-deps
 2. 從後端抓取商品資料至商品詳細資料頁面
 3. create 3 columns for image, info and action
+## 13. 讀取訊息以及錯誤訊息設定
+1. 設定讀取訊息組件
+2. 使用 spinner 組件
+3. 創建各類訊息組件
+4. 創建 utils.js 來設定接取 Error 錯誤訊息
