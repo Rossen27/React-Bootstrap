@@ -45,3 +45,7 @@ Lessons
 1. 創建 Rating component
 2. 創建 Product component
 3. 使用 Rating component 在 Product component
+## 12. 創建商品詳細資料
+1. npm install react-helmet-async --legacy-peer-deps
+2. 從後端抓取商品資料至商品詳細資料頁面
+3. create 3 columns for image, info and action

@@ -1,12 +1,121 @@
+import axios from 'axios';
+import { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Badge from 'react-bootstrap/Badge';
+import Rating from '../components/Rating';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/esm/Button';
+import { Helmet } from 'react-helmet-async';
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'FETCH_REQUEST':
+      return {...state, loading: true};
+    case 'FETCH_SUCCESS':
+      return {...state, product: action.payload, loading: false};
+    case 'FETCH_FAIL':
+      return {...state, loading: false, error: action.payload};
+      default:
+        return state;
+  }
+};
 
 function ProductScreen() {
   const params = useParams();
   const { slug } = params;
-  return (
-    <div>
-      <h1>{slug}</h1>
-    </div>
-  );
+
+  const [{loading, error, product}, dispatch] = useReducer(reducer, {
+    product: [],
+    loading: true, 
+    error: '',
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch({type: 'FETCH_REQUEST'});
+      try {
+        const result = await axios.get(`/api/products/slug/${slug}`);
+        dispatch({type: 'FETCH_SUCCESS', payload: result.data});
+      } catch (error) {
+        dispatch({type: 'FETCH_FAIL', payload: error.message});
+      }
+    };
+    fetchData();
+  },[slug]);
+  return loading ? (
+      <div>loading...</div>
+    ) : error?  (
+      <div>{error}</div>
+    ) : (
+      <div>
+        <Row>
+          <Col md={6}>
+            <img
+              className='img-large'
+              src={product.image}
+              alt={product.name} 
+            />  
+          </Col>
+          <Col md={3}>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+              <Helmet>
+                <title>{product.name}</title>
+              </Helmet>
+                <h2>{product.name}</h2>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Rating                 
+                rating={product.rating}
+                numReviews={product.numReviews}
+                ></Rating>
+              </ListGroup.Item>
+              <ListGroup.Item>售價 : ${product.price}</ListGroup.Item>
+              <ListGroup.Item>
+                產品描述 : 
+                <p>{product.description}</p>
+              </ListGroup.Item>
+            </ListGroup>
+          </Col>
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <ListGroup variant='flush'>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>價格 : </Col>
+                      <Col>${product.price}</Col>
+                    </Row>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>庫存狀態 :</Col>
+                      <Col>${product.countInStock> 0 ? (
+                      <Badge bg="success">尚有存貨</Badge>
+                      ) : ( 
+                      <Badge bg="danger">暫無庫存</Badge>
+                      )}
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                  
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <div className='d-grid'>
+                        <Button variant='outline-dark primary' size="sm">
+                          加入購物車
+                        </Button>
+                      </div>
+                    </ListGroup.Item>
+                  )}
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    );
 }
 export default ProductScreen;
