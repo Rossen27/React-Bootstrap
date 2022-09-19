@@ -74,3 +74,8 @@ Lessons
 1. 創建登入頁面
 2. 新增 email & password 
 3. 新增登入按鈕
+## 19.建立 MongoDB 並串接 Node 後端
+1. 建立 MongoDB 雲端資料庫 - 方法 1 npm install mongoose & npm install dotenv
+2. 安裝 MongoDB 本地端資料庫 - 方法 2
+3. 安裝 MongoDB
+4. 串接 MongoDB
