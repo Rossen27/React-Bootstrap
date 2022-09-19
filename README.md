@@ -84,3 +84,7 @@ Lessons
 2. create seed route
 3. use route in server.js
 4. seed sample product
+## 21.建立 Admin 帳戶以及 Customer 帳戶
+1. 建立 User 資料 npm i bcryptjs
+2. 送出 User 範本
+3. 建立 User 路徑
