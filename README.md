@@ -66,3 +66,7 @@ Lessons
 1. 建立 2 columns
 2. display items list
 3. create action column
+## 17. 連結購物車
+1. 購物車頁面增加與減少
+2. 購物車頁面刪除功能
+3. 購物車頁面結帳功能
