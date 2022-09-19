@@ -88,3 +88,8 @@ Lessons
 1. 建立 User 資料 npm i bcryptjs
 2. 送出 User 範本
 3. 建立 User 路徑
+## 22.建立後臺登入系統
+1. 建立登入 api
+2. npm install jsonwebtoken
+3. npm install express-async-handler
+4. define generateToken
