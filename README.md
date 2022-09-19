@@ -79,3 +79,8 @@ Lessons
 2. 安裝 MongoDB 本地端資料庫 - 方法 2
 3. 安裝 MongoDB
 4. 串接 MongoDB
+## 20.將 Node.js 資料轉入 MongoDB 雲端資料庫
+1. 建立一個雲端資料庫
+2. create seed route
+3. use route in server.js
+4. seed sample product
