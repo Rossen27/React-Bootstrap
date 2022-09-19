@@ -79,9 +79,8 @@ export default function CartScreen() {
                   <div className="d-grid">
                     <Button
                       type="button"
-                      variant="primary"
-                      disabled={cartItems.length === 0}
-                    >
+                      variant="outline-dark primary"
+                      disabled={cartItems.length === 0} size="sm">
                       結帳
                     </Button>
                   </div>
