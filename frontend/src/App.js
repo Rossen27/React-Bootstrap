@@ -45,12 +45,12 @@ function App() {
                 <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>
-                      User profile
+                      用戶資料
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/orderhistory">
                     <NavDropdown.Item>
-                      Order History
+                      歷史訂單
                     </NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Divider />
