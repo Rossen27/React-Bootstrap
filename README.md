@@ -93,3 +93,7 @@ Lessons
 2. npm install jsonwebtoken
 3. npm install express-async-handler
 4. define generateToken
+## 23.串聯前端登入系統並設定錯誤訊息
+1. handle submit action - 讓Error視窗變好看的套件npm i react-toastify --legacy-peer-deps
+2. save token in store and local storage
+3. show user name in header
