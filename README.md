@@ -97,3 +97,7 @@ Lessons
 1. handle submit action - 讓Error視窗變好看的套件npm i react-toastify --legacy-peer-deps
 2. save token in store and local storage
 3. show user name in header
+## 24.建立收貨資料頁面
+1. 建立收貨表格
+2. 儲存收貨資料
+3. 增加確認頁面
