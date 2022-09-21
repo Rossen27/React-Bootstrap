@@ -17,6 +17,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -40,7 +41,7 @@ function App() {
             </LinkContainer>
             <Nav className="justify-content-end">
               <Link to="/cart" className='nav-link'>
-              <i class="bi bi-cart2"></i>
+              <i className="bi bi-cart2"></i>
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg="danger">
                     {cart.cartItems.reduce((a, c) => c.quantity, 0)}
@@ -69,10 +70,9 @@ function App() {
                 </NavDropdown>
               ):(
                 <Link className="nav-Link" to="/signin">
-                <i class="bi bi-person-circle"></i>
+                <i className="bi bi-person-circle"></i>
                 </Link>
               )}
-
             </Nav>
           </Container>
         </Navbar>
@@ -85,6 +85,7 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route path="/order/:id" element={<OrderScreen />}></Route>
               <Route path="/shipping" element={<ShippingAddressScreen />} />
               <Route path="/payment" element={<PaymentMethodScreen />} />
               <Route path="/" element={<HomeScreen />} />
