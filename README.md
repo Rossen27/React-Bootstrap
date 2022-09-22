@@ -115,3 +115,13 @@ Lessons
 1. 為 order/:id 創建後端 api
 2. 在前端獲取訂單 api
 3. 顯示訂單信息
+## 30.透過 Paypal 支付訂單
+1. generate paypal client id
+2. create api to return client id
+3. npm install @paypal/react-paypal-js --force
+4. use PayPalScriptProvider in index.js
+5. use usePayPalScriptReducer in Order Screen
+6. implement loadPaypalScript function
+7. render paypal button
+8. implement onApprove payment function
+9. create pay order api in backend
