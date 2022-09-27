@@ -29,6 +29,7 @@ function reducer(state, action) {
       return { ...state, loadingPay: false };
     case 'PAY_RESET':
       return { ...state, loadingPay: false, successPay: false };
+
     default:
       return state;
   }
@@ -36,59 +37,57 @@ function reducer(state, action) {
 export default function OrderScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
-
   const params = useParams();
   const { id: orderId } = params;
   const navigate = useNavigate();
 
   const [{ loading, error, order, successPay, loadingPay }, dispatch] =
-  useReducer(reducer, {
-    loading: true,
-    order: {},
-    error: '',
-    successPay: false,
-    loadingPay: false,
-  });
-
-const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-
-function createOrder(data, actions) {
-  return actions.order
-    .create({
-      purchase_units: [
-        {
-          amount: { value: order.totalPrice },
-        },
-      ],
-    })
-    .then((orderID) => {
-      return orderID;
+    useReducer(reducer, {
+      loading: true,
+      order: {},
+      error: '',
+      successPay: false,
+      loadingPay: false,
     });
-}
 
-function onApprove(data, actions) {
-  return actions.order.capture().then(async function (details) {
-    try {
-      dispatch({ type: 'PAY_REQUEST' });
-      const { data } = await axios.put(
-        `/api/orders/${order._id}/pay`,
-        details,
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: 'PAY_SUCCESS', payload: data });
-      toast.success('Order is paid');
-    } catch (err) {
-      dispatch({ type: 'PAY_FAIL', payload: getError(err) });
-      toast.error(getError(err));
-    }
-  });
-}
-function onError(err) {
-  toast.error(getError(err));
-}
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
+  function createOrder(data, actions) {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: { value: order.totalPrice },
+          },
+        ],
+      })
+      .then((orderID) => {
+        return orderID;
+      });
+  }
+
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        dispatch({ type: 'PAY_REQUEST' });
+        const { data } = await axios.put(
+          `/api/orders/${order._id}/pay`,
+          details,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch({ type: 'PAY_SUCCESS', payload: data });
+        toast.success('Order is paid');
+      } catch (err) {
+        dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+        toast.error(getError(err));
+      }
+    });
+  }
+  function onError(err) {
+    toast.error(getError(err));
+  }
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -102,9 +101,8 @@ function onError(err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
-
     if (!userInfo) {
-      return navigate('/signin');
+      return navigate('/login');
     }
     if (!order._id || successPay || (order._id && order._id !== orderId)) {
       fetchOrder();

@@ -125,3 +125,7 @@ Lessons
 7. render paypal button
 8. implement onApprove payment function
 9. create pay order api in backend
+## 31.顯示歷史訂單
+1. 創建歷史訂單頁面
+2. 連接歷史訂單 API
+3. 在前端串聯 API

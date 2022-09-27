@@ -18,6 +18,7 @@ import SignupScreen from './screens/SignupScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -32,50 +33,53 @@ function App() {
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container'>
-      <ToastContainer position="bottom-center" limit={1} />
+        <ToastContainer position="bottom-center" limit={1} />
         <header>
-        <Navbar bg="dark" variant="dark">
-          <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>Rossen</Navbar.Brand>
-            </LinkContainer>
-            <Nav className="justify-content-end">
-              <Link to="/cart" className='nav-link'>
-              <i className="bi bi-cart2"></i>
-                {cart.cartItems.length > 0 && (
-                  <Badge pill bg="danger">
-                    {cart.cartItems.reduce((a, c) => c.quantity, 0)}
-                  </Badge>
-                )}
-              </Link>
-              {userInfo ? (
-                <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>
-                      用戶資料
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/orderhistory">
-                    <NavDropdown.Item>
-                      歷史訂單
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                  <Link
-                    className='dropdown-item'
-                    to='#signinout'
-                    onClick={signoutHandler}>
-                      登出
+          <Navbar bg="dark" variant="dark" expand="lg">
+            <Container>
+              <LinkContainer to="/">
+                <Navbar.Brand>Rossen</Navbar.Brand>
+              </LinkContainer>
+              <Navbar.Toggle aria-controls='basic-navbar-nav' />
+              <Navbar.Collapse id='basic-navbar-nav'>
+                <Nav className="me-auto w-100 justify-content-end">
+                  <Link to="/cart" className='nav-link'>
+                    <i className="bi bi-cart2"></i>
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg="danger">
+                        {cart.cartItems.reduce((a, c) => c.quantity, 0)}
+                      </Badge>
+                    )}
+                  </Link>
+                  {userInfo ? (
+                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                      <LinkContainer to="/profile">
+                        <NavDropdown.Item>
+                          用戶資料
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/orderhistory">
+                        <NavDropdown.Item>
+                          歷史訂單
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Divider />
+                      <Link
+                        className='dropdown-item'
+                        to='#signinout'
+                        onClick={signoutHandler}>
+                        登出
+                      </Link>
+                    </NavDropdown>
+                  ) : (
+                    <Link className="nav-Link" to="/signin">
+                      <i className="bi bi-person-circle"></i>
                     </Link>
-                </NavDropdown>
-              ):(
-                <Link className="nav-Link" to="/signin">
-                <i className="bi bi-person-circle"></i>
-                </Link>
-              )}
-            </Nav>
-          </Container>
-        </Navbar>
+                  )}
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
         </header>
         <main>
           <Container className='mt-3'>
@@ -85,9 +89,10 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
-              <Route path="/order/:id" element={<OrderScreen />}></Route>
-              <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
-              <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+              <Route path="/order/:id" element={<OrderScreen />} />
+              <Route path='orderhistory' element={<OrderHistoryScreen />} />
+              <Route path="/shipping" element={<ShippingAddressScreen />} />
+              <Route path="/payment" element={<PaymentMethodScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
@@ -97,7 +102,7 @@ function App() {
         </footer>
       </div>
     </BrowserRouter>
-  );                                          
+  );
 }
 
 export default App;
