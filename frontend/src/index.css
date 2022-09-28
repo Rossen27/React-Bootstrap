@@ -86,3 +86,8 @@ main {
 .active-nav {
   left: 0;
 }
+
+/* src\screens\SearchScreen.js */
+.text-bold {
+  font-weight: bold;
+}
