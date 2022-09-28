@@ -14,12 +14,6 @@ main {
   flex: 1; /* TODO 標題位置 */
 }
 
-.btn-primary,
-.btn-outline-primary {
-  background-color: #f0c040;
-  color: #000000;
-}
-
 .products {
   display: flex;
   flex-wrap: wrap;
