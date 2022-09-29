@@ -1,10 +1,13 @@
 {
   "cSpell.words": [
+    "childern",
     "contro",
     "describedby",
     "MERN",
     "orderhistory",
+    "orderlist",
     "placeorder",
+    "productlist",
     "Recat",
     "signin",
     "signinout",
@@ -12,6 +15,7 @@
     "singin",
     "statux",
     "toastify",
-    "toprated"
+    "toprated",
+    "userlist"
   ]
 }

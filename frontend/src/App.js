@@ -25,6 +25,9 @@ import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
+import ProtectedRoute from './components/ProtectedRoute';
+import DashboardScreen from './screens/DashboardScreen';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -109,6 +112,20 @@ function App() {
                       <i className="bi bi-person-circle"></i>
                     </Link>
                   )}
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title='Admin' id='admin-nav-dropdown'>
+                      <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item> 管 理 </NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item> 商 品 管 理 </NavDropdown.Item>
+                      </LinkContainer>                      <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item> 訂 單 管 理 </NavDropdown.Item>
+                      </LinkContainer>                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item> 使 用 者 管 理 </NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -145,18 +162,43 @@ function App() {
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/profile" element={<ProfileScreen />} />
+              <Route 
+                path="/profile" 
+                element={
+                  <ProtectedRoute>
+                    <ProfileScreen />
+                  </ProtectedRoute>
+                } 
+              />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
-              <Route path="/order/:id" element={<OrderScreen />}></Route>
+              <Route 
+                path="/order/:id" 
+                element={
+                    <ProfileScreen>
+                      <OrderScreen />
+                    </ProfileScreen>
+                  }>
+                  </Route>
               <Route
                 path="/orderhistory"
-                element={<OrderHistoryScreen />}
-              ></Route>
+                element={
+                  <ProfileScreen>
+                    <OrderHistoryScreen />
+                  </ProfileScreen>}
+                ></Route>
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+              {/* 管理員路徑 */}
+              <Route 
+                path="/admin/dashboard" 
+                element={
+                  <AdminRoute>
+                    <DashboardScreen />
+                  </AdminRoute>} 
+                  ></Route>
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
