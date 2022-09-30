@@ -31,6 +31,14 @@ export const isAuth = (req, res, next) => {
         }
       });
   } else {
-    res.status(401).send({ message: 'No Token' });
+    res.status(401).send({ message: 'Token 無 效' });
+  }
+};
+
+export const isAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).send({ message: '管 理 員 Token 無 效' });
   }
 };

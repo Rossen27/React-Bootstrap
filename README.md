@@ -153,3 +153,7 @@ Lessons
 1. 定義受保護的路徑組件
 2. 定義管理的路徑組件
 3. 在選單中添加管理員選項
+## 37.創建儀表數據
+1. 創建用戶數據介面 npm install --save react-google-chart --legacy-peer-deps
+2. 實現串連後端 API
+3. 將 UI 連接至後端
