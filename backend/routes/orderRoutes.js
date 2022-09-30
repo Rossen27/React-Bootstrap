@@ -26,9 +26,9 @@ orderRouter.post(
 );
 /* TODO : 圖表資料庫 */
 orderRouter.get(
-  '/summary', 
+  '/summary',
   isAuth,
-  isAdmin, 
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.aggregate([
       {
@@ -54,17 +54,17 @@ orderRouter.get(
           orders: { $sum: 1 },
           sales: { $sum: '$totalPrice' },
         },
-      }, 
-      { $sort: { id: 1 } },
+      },
+      { $sort: { _id: 1 } },
     ]);
     const productCategories = await Product.aggregate([
       {
         $group: {
           _id: '$category',
           count: { $sum: 1 },
-        }
-      }
-    ])
+        },
+      },
+    ]);
     res.send({ users, orders, dailyOrders, productCategories });
   })
 );
