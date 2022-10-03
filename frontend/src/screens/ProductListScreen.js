@@ -30,7 +30,7 @@ export default function ProductListScreen() {
     loading: true,
     error: '',
   });
-
+// eslint-disable-next-line
   const { search, pathname } = useLocation();
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
