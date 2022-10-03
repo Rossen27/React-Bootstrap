@@ -160,3 +160,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 創建用戶數據介面 npm install --save react-google-chart --legacy-peer-deps
 2. 實現串連後端 API
 3. 將 UI 連接至後端
+## 38.訂單管理
+1. 創建產品列表 UI
+2. 連接後端 API
+3. 接取資料
