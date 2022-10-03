@@ -51,7 +51,7 @@ export default function DashboardScreen() {
   }, [userInfo]);
   return ( 
     <div>
-      <h1> 介 面 管 理 </h1>
+      <h1> 訂 單 總 資 訊 </h1>
       {loading ? (
         <LoadingBox />
         ) : error ? (
@@ -67,7 +67,7 @@ export default function DashboardScreen() {
                     ? summary.users[0].numUsers
                     : 0}
                   </Card.Title>
-                  <Card.Text> 用 戶 </Card.Text>
+                  <Card.Text> 用 戶 數 量 </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -79,7 +79,7 @@ export default function DashboardScreen() {
                     ? summary.orders[0].numOrders
                     : 0}
                   </Card.Title>
-                  <Card.Text> 訂 單 </Card.Text>
+                  <Card.Text> 訂 單 數 量 </Card.Text>
                 </Card.Body>
               </Card>
             </Col> 
