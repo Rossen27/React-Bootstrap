@@ -4,6 +4,8 @@
   "prettier.singleQuote": true,
   "editor.bracketPairColorization.enabled": true,
   "cSpell.words": [
+    "Amazona",
+    "mailgun",
     "orderhistory",
     "orderlist",
     "placeorder",
