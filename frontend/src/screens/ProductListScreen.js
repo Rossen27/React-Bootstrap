@@ -144,7 +144,7 @@ export default function ProductListScreen() {
         <Col className="col text-end">
           <div>
             <Button type="button" variant='outline-dark primary' onClick={createHandler}>
-              商 品 管 理 
+              新 增 商 品
             </Button>
           </div>
         </Col>
