@@ -144,7 +144,7 @@ export default function ProductListScreen() {
         <Col className="col text-end">
           <div>
             <Button type="button" variant='outline-dark primary' onClick={createHandler}>
-              總 訂 單 管 理 
+              商 品 管 理 
             </Button>
           </div>
         </Col>
@@ -167,7 +167,6 @@ export default function ProductListScreen() {
                 <th> 價 格 </th>
                 <th> 類 別 </th>
                 <th> 品 牌 </th>
-                <th> 付 款 結 果 </th>
                 <th> 資 料 編 輯 </th>
               </tr>
             </thead>
@@ -190,7 +189,7 @@ export default function ProductListScreen() {
                     &nbsp;
                     <Button
                       type="button"
-                      variant='outline-dark primary'
+                      variant='outline-danger primary'
                       onClick={() => deleteHandler(product)}
                     >
                       Delete
