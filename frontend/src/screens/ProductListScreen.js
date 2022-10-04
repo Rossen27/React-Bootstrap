@@ -168,6 +168,7 @@ export default function ProductListScreen() {
                 <th> 類 別 </th>
                 <th> 品 牌 </th>
                 <th> 付 款 結 果 </th>
+                <th> 資 料 編 輯 </th>
               </tr>
             </thead>
             <tbody>
@@ -184,7 +185,7 @@ export default function ProductListScreen() {
                       variant='outline-dark primary'
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
-                      Edit
+                      編 輯
                     </Button>
                     &nbsp;
                     <Button

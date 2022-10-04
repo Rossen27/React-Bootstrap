@@ -168,3 +168,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 創建廠品按鈕
 2. 實現後端 API
 3. 增加點擊處理
+## 40.建立訂單編輯
+1. 建立編輯按鈕
+2. 設定編輯頁面 UI
+3. 在輸入框中顯示產品信息
