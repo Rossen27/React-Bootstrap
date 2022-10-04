@@ -164,3 +164,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 創建產品列表 UI
 2. 連接後端 API
 3. 接取資料
+## 39.訂單管理
+1. 創建廠品按鈕
+2. 實現後端 API
+3. 增加點擊處理
