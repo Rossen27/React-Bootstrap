@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useReducer } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { Link, useLocation } from 'react-router-dom';
 import { Store } from '../Store';
-import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
-
+import MessageBox from '../components/MessageBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +19,7 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
@@ -30,7 +30,7 @@ export default function ProductListScreen() {
     loading: true,
     error: '',
   });
-// eslint-disable-next-line
+
   const { search, pathname } = useLocation();
   const sp = new URLSearchParams(search);
   const page = sp.get('page') || 1;
@@ -41,16 +41,16 @@ export default function ProductListScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/products/admin?page=${page}`, {
-          Headers: { Authorization: `Bearer ${userInfo.token}` },
+        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch(err) {
 
-      }
-    }
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      } catch (err) {}
+    };
     fetchData();
   }, [page, userInfo]);
+
   return (
     <div>
       <h1> 訂 單 總 覽 </h1>
@@ -94,7 +94,7 @@ export default function ProductListScreen() {
           ))}
         </div>
         </>
-      )};
+      )}
     </div>
-  )
+  );
 }
