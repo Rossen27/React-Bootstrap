@@ -89,7 +89,7 @@ export default function OrderHistoryScreen() {
                     variant='outline-dark primary' 
                     size="sm"
                     onClick={() => {
-                      navigate(`/order/${order._id}`);
+                      navigate(`/order/${order._id}`)
                     }}
                   >
                     查 看

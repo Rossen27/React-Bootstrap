@@ -168,6 +168,7 @@ export default function OrderScreen() {
     successPay,
     successDeliver,
   ]);
+
   async function deliverOrderHandler() {
     try {
       dispatch({ type: 'DELIVER_REQUEST' });
@@ -185,6 +186,7 @@ export default function OrderScreen() {
       dispatch({ type: 'DELIVER_FAIL' });
     }
   }
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -202,7 +204,7 @@ export default function OrderScreen() {
               <Card.Title>購物車</Card.Title>
               <Card.Text>
                 <strong>姓名:</strong> {order.shippingAddress.fullName} <br />
-                <strong>地址s: </strong>{order.shippingAddress.address},
+                <strong>地址s: </strong> {order.shippingAddress.address},
                 {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 ,{order.shippingAddress.country}
                 &nbsp;
@@ -210,9 +212,8 @@ export default function OrderScreen() {
                   order.shippingAddress.location.lat && (
                     <a
                       target="_new"
-                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
-                    >
-                                            Show On Map
+                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}                    >
+                      Show On Map
                     </a>
                   )}
               </Card.Text>
@@ -236,7 +237,7 @@ export default function OrderScreen() {
                   付款方式: {order.paidAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant="danger">Not Paid</MessageBox>
+                <MessageBox variant="danger"> 尚 未 付 款 </MessageBox>
               )}
             </Card.Body>
           </Card>
@@ -249,7 +250,7 @@ export default function OrderScreen() {
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
                       <Col md={6}>
-                        <img
+                      <img
                           src={item.image}
                           alt={item.name}
                           className="img-fluid rounded img-thumbnail"
@@ -314,6 +315,16 @@ export default function OrderScreen() {
                     </div>
                     )}
                   {loadingPay && <LoadingBox></LoadingBox>}
+                  </ListGroup.Item>
+                )}
+                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                  <ListGroup.Item>
+                    {loadingDeliver && <LoadingBox></LoadingBox>}
+                    <div className="d-grid">
+                      <Button type="button" variant='outline-dark primary' onClick={deliverOrderHandler}>
+                        Deliver Order
+                      </Button>
+                    </div>
                   </ListGroup.Item>
                 )}
               </ListGroup>
