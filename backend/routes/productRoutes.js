@@ -1,22 +1,19 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import {   isAuth, isAdmin,  } from '../utils.js';
-
+import { isAuth, isAdmin } from '../utils.js';
 const productRouter = express.Router();
-
 productRouter.get('/', async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
-
 productRouter.post(
-  '/', 
-  isAuth, 
+  '/',
+  isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      name: 'sample name' + Date.now(),
+      name: 'sample name ' + Date.now(),
       slug: 'sample-name-' + Date.now(),
       image: '/images/p1.jpg',
       price: 0,
@@ -32,12 +29,36 @@ productRouter.post(
   })
 );
 
+productRouter.put(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (product) {
+      product.name = req.body.name;
+      product.slug = req.body.slug;
+      product.price = req.body.price;
+      product.image = req.body.image;
+      product.category = req.body.category;
+      product.brand = req.body.brand;
+      product.countInStock = req.body.countInStock;
+      product.description = req.body.description;
+      await product.save();
+      res.send({ message: 'Product Updated' });
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+  })
+);
+
 const PAGE_SIZE = 3;
 
 productRouter.get(
   '/admin',
-  isAuth, 
-  isAdmin,   
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;
@@ -45,16 +66,15 @@ productRouter.get(
     const products = await Product.find()
       .skip(pageSize * (page - 1))
       .limit(pageSize);
-      const countProducts =await Product.countDocuments();
-      res.send({
-        products,
-        countProducts,
-        page,
-        pages: Math.ceil(countProducts / pageSize),
-      });
+    const countProducts = await Product.countDocuments();
+    res.send({
+      products,
+      countProducts,
+      page,
+      pages: Math.ceil(countProducts / pageSize),
+    });
   })
 );
-
 productRouter.get(
   '/search',
   expressAsyncHandler(async (req, res) => {
@@ -66,7 +86,6 @@ productRouter.get(
     const rating = query.rating || '';
     const order = query.order || '';
     const searchQuery = query.query || '';
-
     const queryFilter =
       searchQuery && searchQuery !== 'all'
         ? {
@@ -107,7 +126,6 @@ productRouter.get(
         : order === 'newest'
         ? { createdAt: -1 }
         : { _id: -1 };
-
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
@@ -117,7 +135,6 @@ productRouter.get(
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
-
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
@@ -132,8 +149,6 @@ productRouter.get(
     });
   })
 );
-
-
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
@@ -141,13 +156,12 @@ productRouter.get(
     res.send(categories);
   })
 );
-
 productRouter.get('/slug/:slug', async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: '無此商品' });
+    res.status(404).send({ message: 'Product Not Found' });
   }
 });
 productRouter.get('/:id', async (req, res) => {
@@ -155,8 +169,7 @@ productRouter.get('/:id', async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: '無此商品' });
+    res.status(404).send({ message: 'Product Not Found' });
   }
 });
-
 export default productRouter;
