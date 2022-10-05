@@ -5,6 +5,7 @@
   "editor.bracketPairColorization.enabled": true,
   "cSpell.words": [
     "Amazona",
+    "cloudinary",
     "mailgun",
     "orderhistory",
     "orderlist",
@@ -14,6 +15,7 @@
     "Signin",
     "signinout",
     "signout",
+    "streamifier",
     "toastify",
     "toprated",
     "userlist"

@@ -175,3 +175,8 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 ## 41.實施商品更新
 1. 創建編輯產品後端 API
 2. 處理更新點擊
+## 42.實施商品照更新
+1. 創建雲端帳戶 npm i streamifier、 npm i cloudinary、npm i multer
+2. 在 env 文件中使用 API 
+3. 處理上傳文件
+4. 實現後端 API 上傳
