@@ -180,3 +180,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 2. 在 env 文件中使用 API 
 3. 處理上傳文件
 4. 實現後端 API 上傳
+## 43.時間商品刪除功能
+1. 設定刪除按鈕
+2. 設定後端 API
+3. 讓刪除鈕實施
