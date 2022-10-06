@@ -19,11 +19,7 @@ const reducer = (state, action) => {
         loading: false,
       };
     case 'FETCH_FAIL':
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
@@ -36,23 +32,25 @@ export default function OrderListScreen() {
     loading: true,
     error: '',
   });
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-      dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/order`, {
+        dispatch({ type: 'FETCH_REQUEST' });
+        const { data } = await axios.get(`/api/orders`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-      dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
-        dispatch({ 
-          type: 'FETCH_FAIL', 
-          payload: getError(err) });
+        dispatch({
+          type: 'FETCH_FAIL',
+          payload: getError(err),
+        });
       }
     };
     fetchData();
-  },[userInfo]);
+  }, [userInfo]);
+
 
   return (
     <div>
@@ -108,5 +106,5 @@ export default function OrderListScreen() {
         </table>
       )}
     </div>
-  )
+  );
 }
