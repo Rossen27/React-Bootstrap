@@ -114,7 +114,7 @@ function ProductScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>庫存狀態 :</Col>
-                    <Col>${product.countInStock > 0 ? (
+                    <Col>{product.countInStock > 0 ? (
                       <Badge bg="success">尚有存貨</Badge>
                     ) : (
                       <Badge bg="danger">暫無庫存</Badge>
