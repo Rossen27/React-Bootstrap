@@ -19,5 +19,8 @@
     "toastify",
     "toprated",
     "userlist"
-  ]
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

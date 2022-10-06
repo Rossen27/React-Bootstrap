@@ -184,3 +184,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 設定刪除按鈕
 2. 設定後端 API
 3. 讓刪除鈕實施
+## 44.列出清單
+1. 創建訂單列表頁面
+2. 引入 Backen API
+3. 獲取並顯示訂單

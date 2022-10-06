@@ -1,12 +1,12 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import Navbar from 'react-bootstrap/Navbar';
+import Badge from 'react-bootstrap/Badge';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Badge from 'react-bootstrap/Badge';
 import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useContext, useEffect, useState } from 'react';
@@ -30,11 +30,11 @@ import DashboardScreen from './screens/DashboardScreen';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import OrderListScreen from './screens/OrderListScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
-
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
@@ -44,7 +44,6 @@ function App() {
   };
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -58,17 +57,18 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <div className={
+      <div
+        className={
           sidebarIsOpen
             ? 'd-flex flex-column site-container active-cont'
             : 'd-flex flex-column site-container'
-      }
+        }
       >
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-            <Button
+              <Button
                 variant="dark"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
@@ -79,7 +79,7 @@ function App() {
               </LinkContainer>
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
-              <SearchBox />
+                <SearchBox />
                 <Nav className="me-auto w-100 justify-content-end">
                   <Link to="/cart" className='nav-link'>
                     <i className="bi bi-cart2"></i>
@@ -158,57 +158,66 @@ function App() {
         </div>
         <main>
           <Container className='mt-3'>
-            <Routes>
-            <Route path="/product/:slug" element={<ProductScreen />} />
+          <Routes>
+              <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route 
-                path="/profile" 
+              <Route
+                path="/profile"
                 element={
                   <ProtectedRoute>
                     <ProfileScreen />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route path="/placeorder" element={<PlaceOrderScreen />} />
-              <Route 
-                path="/order/:id" 
+            <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route
+                path="/order/:id"
                 element={
-                    <ProfileScreen>
-                      <OrderScreen />
-                    </ProfileScreen>
-                  }>
-                  </Route>
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route
                 path="/orderhistory"
                 element={
-                  <ProfileScreen>
+                  <ProtectedRoute>
                     <OrderHistoryScreen />
-                  </ProfileScreen>}
-                ></Route>
+                  </ProtectedRoute>
+                }
+              ></Route>
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
-              {/* 管理員路徑 */}
-              <Route 
-                path="/admin/dashboard" 
+                            {/* 管理員路徑 */}
+              <Route
+                path="/admin/dashboard"
                 element={
                   <AdminRoute>
                     <DashboardScreen />
-                  </AdminRoute>} 
-                  >
-                  </Route>
-              <Route 
-                path="/admin/products" 
+                  </AdminRoute>}
+              >
+              </Route>
+              <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrderListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/products"
                 element={
                   <AdminRoute>
                     <ProductListScreen />
                   </AdminRoute>} >
-                  </Route>
+              </Route>
               <Route
                 path="/admin/product/:id"
                 element={
