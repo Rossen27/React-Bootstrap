@@ -100,6 +100,22 @@ orderRouter.get(
   })
 );
 orderRouter.put(
+  '/:id/deliver',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+      await order.save();
+      res.send({ message: '訂單已交付' });
+    } else {
+      res.status(404).send({ message: '訂單交付失敗' });
+    }
+  })
+  );
+
+orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {

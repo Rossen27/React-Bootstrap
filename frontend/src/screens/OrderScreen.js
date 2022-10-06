@@ -103,7 +103,7 @@ export default function OrderScreen() {
           }
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
-        toast.success('Order is paid');
+        toast.success('訂單已付款');
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
@@ -322,7 +322,7 @@ export default function OrderScreen() {
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     <div className="d-grid">
                       <Button type="button" variant='outline-dark primary' onClick={deliverOrderHandler}>
-                        Deliver Order
+                        交 付 訂 單
                       </Button>
                     </div>
                   </ListGroup.Item>

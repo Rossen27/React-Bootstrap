@@ -188,3 +188,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 創建訂單列表頁面
 2. 引入 Backen API
 3. 獲取並顯示訂單
+## 45. 交付訂單
+1. 添加交付按鈕
+2. 處理點擊動作
+3. 串連後端 API 以進行交付
