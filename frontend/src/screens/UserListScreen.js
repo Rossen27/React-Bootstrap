@@ -59,8 +59,8 @@ export default function UserListScreen() {
         });
       }
     };
-    if(successDelete){
-      dispatch({ typ: 'DELETE_RESET' });
+    if (successDelete) {
+      dispatch({ type: 'DELETE_RESET' });
     } else {
       fetchData();
     }
@@ -73,7 +73,7 @@ export default function UserListScreen() {
         await axios.delete(`/api/users/${user._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        toast.success('已刪除用戶');
+        toast.success('用戶已刪除');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (error) {
         toast.error(getError(error));

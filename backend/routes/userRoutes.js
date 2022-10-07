@@ -52,7 +52,7 @@ userRouter.delete(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById({ email: req.body.email });
+    const user = await User.findById(req.params.id);
     if (user) {
       if (user.email === 'admin@example.com') {
         res.status(400).send({ message: '無法刪除管理者' });
@@ -61,10 +61,10 @@ userRouter.delete(
       await user.remove();
       res.send({ message: '用戶已刪除' });
     } else {
-      res.status(404).send({ message: '用戶無法刪除' });
+      res.status(404).send({ message: '無此用戶' });
     }
-  }
-));
+  })
+);
 
 userRouter.post(
   '/signin',
