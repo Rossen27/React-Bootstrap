@@ -35,6 +35,7 @@ export default function UserEditScreen() {
     loading: true,
     error: '',
   });
+
   const { state } = useContext(Store);
   const { userInfo } = state;
 
@@ -49,23 +50,23 @@ export default function UserEditScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch({ type:'FETCH_REQUEST' });
+        dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/users/${userId}`, {
-          headers: { Authorzation: `Bearer ${userInfo.token}` },
+          headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         setName(data.name);
         setEmail(data.email);
         setIsAdmin(data.isAdmin);
-        dispatch({ type:'FETCH_SUCCESS' });
+        dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
         dispatch({
           type: 'FETCH_FAIL',
           payload: getError(err),
         });
       }
-    }
+    };
     fetchData();
-  },[userId, userInfo]);
+  }, [userId, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -75,18 +76,19 @@ export default function UserEditScreen() {
         `/api/users/${userId}`,
         { _id: userId, name, email, isAdmin },
         {
-          headers: { Authorzation: `Bearer ${userInfo.token}` },
+          headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
-      dispatch({ type: 'UPDATE_SUCCESS' });
-      toast.success( '用戶資料已更新' );
+      dispatch({
+        type: 'UPDATE_SUCCESS',
+      });
+      toast.success('用戶資料已更新');
       navigate('/admin/users');
     } catch (error) {
       toast.error(getError(error));
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
-
   return (
     <div>
         <Container className="small-container">

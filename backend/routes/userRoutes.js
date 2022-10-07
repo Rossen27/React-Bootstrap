@@ -18,8 +18,8 @@ userRouter.get(
 
 userRouter.get(
   '/:id',
-  isAdmin,
   isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -30,7 +30,7 @@ userRouter.get(
   })
 );
 
-userRouter.get(
+userRouter.put(
   '/:id',
   isAuth,
   isAdmin,
@@ -41,7 +41,7 @@ userRouter.get(
       user.email = req.body.email || user.email;
       user.isAdmin = Boolean(req.body.isAdmin);
       const updatedUser = await user.save();
-      res.send({ message: '用戶資料已更新', user: updatedUser });
+      res.send({ message: '用戶已更新', user: updatedUser });
     } else {
       res.status(404).send({ message: '查無此用戶' });
     }
