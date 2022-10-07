@@ -16,6 +16,38 @@ userRouter.get(
   })
 );
 
+userRouter.get(
+  '/:id',
+  isAdmin,
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      res.send(user);
+    } else {
+      res.status(404).send({ message: '查無此用戶' });
+    }
+  })
+);
+
+userRouter.get(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      user.isAdmin = Boolean(req.body.isAdmin);
+      const updatedUser = await user.save();
+      res.send({ message: '用戶資料已更新', user: updatedUser });
+    } else {
+      res.status(404).send({ message: '查無此用戶' });
+    }
+  })
+);
+
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -77,7 +109,7 @@ userRouter.put(
         token: generateToken(updatedUser),
       });
     } else {
-      res.status(404).send({ message: 'User not found' });
+      res.status(404).send({ message: '查無此用戶' });
     }
   })
 );

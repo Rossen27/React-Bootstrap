@@ -200,3 +200,8 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 創建用戶列表頁面
 2. 導入後端 API
 3. 串接使用者資料
+## 48. 編輯使用者
+1. 新增編輯按鈕
+2. 在輸入框中顯示產品信息
+3. 實現後端 API
+4. 處理編輯點擊
