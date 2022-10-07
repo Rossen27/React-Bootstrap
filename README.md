@@ -192,3 +192,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 添加交付按鈕
 2. 處理點擊動作
 3. 串連後端 API 以進行交付
+## 46. 刪除訂單
+1. 增加刪除按鈕
+2. 處理點擊動作
+3. 在後端導入刪除 API

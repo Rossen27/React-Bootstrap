@@ -136,4 +136,19 @@ orderRouter.put(
     }
   })
 );
+orderRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      await order.remove();
+      res.send({ message: '訂單資料已刪除!' });
+    } else {
+      res.status(404).send({ message: '查無此訂單' });
+    }
+  })
+);
+
 export default orderRouter;
