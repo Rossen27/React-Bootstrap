@@ -31,6 +31,7 @@ import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import UserListScreen from './screens/UserListScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -212,6 +213,14 @@ function App() {
                 }
               ></Route>
               <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
                 path="/admin/products"
                 element={
                   <AdminRoute>
@@ -231,7 +240,7 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className='text-center'>All rights reserved</div>
+          <div className='text-center'>我是偽購物網站，但金流是真的不要亂點啊!</div>
         </footer>
       </div>
     </BrowserRouter>
