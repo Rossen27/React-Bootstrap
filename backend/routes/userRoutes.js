@@ -47,6 +47,24 @@ userRouter.put(
     }
   })
 );
+userRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById({ email: req.body.email });
+    if (user) {
+      if (user.email === 'admin@example.com') {
+        res.status(400).send({ message: '無法刪除管理者' });
+        return;
+      }
+      await user.remove();
+      res.send({ message: '用戶已刪除' });
+    } else {
+      res.status(404).send({ message: '用戶無法刪除' });
+    }
+  }
+));
 
 userRouter.post(
   '/signin',

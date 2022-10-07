@@ -205,3 +205,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 2. 在輸入框中顯示產品信息
 3. 實現後端 API
 4. 處理編輯點擊
+## 46. 刪除使用者
+1. 增加刪除按鈕
+2. 處理點擊動作
+3. 在後端導入刪除 API
