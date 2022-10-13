@@ -6,7 +6,7 @@ import { Store } from '../Store';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
 
-const defaultLocation = { lat: 23.044, lng: 120.261 };
+const defaultLocation = { lat: 45.516, lng: -73.56 };
 const libs = ['places'];
 
 export default function MapScreen() {
@@ -16,17 +16,16 @@ export default function MapScreen() {
   const [googleApiKey, setGoogleApiKey] = useState('');
   const [center, setCenter] = useState(defaultLocation);
   const [location, setLocation] = useState(center);
-  
+
   const mapRef = useRef(null);
   const placeRef = useRef(null);
   const markerRef = useRef(null);
-  
 
   const getUserCurrentLocation = () => {
     if (!navigator.geolocation) {
-      alert('此瀏覽器不支援地圖系統')
+      alert('此瀏覽器不支援地圖定位功能');
     } else {
-      navigate.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition((position) => {
         setCenter({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -39,22 +38,19 @@ export default function MapScreen() {
     }
   };
   useEffect(() => {
-
     const fetch = async () => {
       const { data } = await axios('/api/keys/google', {
-        Headers: { Authorization: `BEARER ${userInfo.token}` },
+        headers: { Authorization: `BEARER ${userInfo.token}` },
       });
       setGoogleApiKey(data.key);
       getUserCurrentLocation();
-    }
+    };
 
     fetch();
-
     ctxDispatch({
       type: 'SET_FULLBOX_ON',
     });
-  },[ctxDispatch]);
-
+  }, [ctxDispatch]);
 
   const onLoad = (map) => {
     mapRef.current = map;
@@ -79,7 +75,7 @@ export default function MapScreen() {
     markerRef.current = marker;
   };
 
-  const onConfirm =() => {
+  const onConfirm = () => {
     const places = placeRef.current.getPlaces() || [{}];
     ctxDispatch({
       type: 'SAVE_SHIPPING_ADDRESS_MAP_LOCATION',
@@ -87,11 +83,12 @@ export default function MapScreen() {
         lat: location.lat,
         lng: location.lng,
         address: places[0].formatted_address,
-        name: places[0].vicinity,
+        name: places[0].name,
+        vicinity: places[0].vicinity,
         googleAddressId: places[0].id,
       },
     });
-    toast.success('已定位成功 !');
+    toast.success('已定位成功.');
     navigate('/shipping');
   };
 
