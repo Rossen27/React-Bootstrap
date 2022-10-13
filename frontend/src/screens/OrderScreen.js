@@ -204,7 +204,7 @@ export default function OrderScreen() {
               <Card.Title>購物車</Card.Title>
               <Card.Text>
                 <strong>姓名:</strong> {order.shippingAddress.fullName} <br />
-                <strong>地址s: </strong> {order.shippingAddress.address},
+                <strong>地址: </strong> {order.shippingAddress.address},
                 {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 ,{order.shippingAddress.country}
                 &nbsp;

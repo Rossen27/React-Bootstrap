@@ -83,7 +83,7 @@ function App() {
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>Rossen</Navbar.Brand>
+                <Navbar.Brand>X X X</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
@@ -263,7 +263,7 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className='text-center'>我是偽購物網站，但金流是真的不要亂點啊!</div>
+          <div className='text-center'>我是偽購物網站，但 PayPal 是真的不要亂點啊!</div>
         </footer>
       </div>
     </BrowserRouter>
