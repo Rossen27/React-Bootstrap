@@ -212,7 +212,8 @@ export default function OrderScreen() {
                   order.shippingAddress.location.lat && (
                     <a
                       target="_new"
-                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}                    >
+                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
+                    >
                       顯 示 地 圖
                     </a>
                   )}

@@ -53,7 +53,7 @@ export default function ShippingAddressScreen() {
 
     useEffect(() => {
       ctxDispatch({ type: 'SET_FULLBOX_OFF' });
-    },[ctxDispatch, fullBox]);
+    }, [ctxDispatch, fullBox]);
   return <div>
       <Helmet>
         <title> 收 件 地 址 </title>
@@ -111,7 +111,7 @@ export default function ShippingAddressScreen() {
           >
             選擇居住位置
           </Button>
-          {shippingAddress.location && shippingAddress.location.lat ?(
+          {shippingAddress.location && shippingAddress.location.lat ? (
             <div>
               緯度 : {shippingAddress.location.lat}
               經度 : {shippingAddress.location.lng}
