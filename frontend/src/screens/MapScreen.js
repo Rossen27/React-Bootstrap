@@ -108,8 +108,8 @@ export default function MapScreen() {
           onPlacesChanged={onPlacesChanged}
           >
             <div className='map-input-box'>
-              <input type='text' placeholder='請輸入收件地址'></input>
-              <Button type='button' onClick={onConfirm} variant="outline-secondary"> 送 出 </Button>
+              <input type='text' placeholder='請輸入地址'></input>
+              <Button type='button' onClick={onConfirm} variant="outline-dark primary"> 送 出 </Button>
             </div>
           </StandaloneSearchBox>
           <Marker position={location} onLoad={onMarkerLoad}></Marker>
