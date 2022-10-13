@@ -213,7 +213,7 @@ export default function OrderScreen() {
                     <a
                       target="_new"
                       href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}                    >
-                      Show On Map
+                      顯 示 地 圖
                     </a>
                   )}
               </Card.Text>

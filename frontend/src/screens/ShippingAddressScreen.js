@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/esm/Button';
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
@@ -10,6 +10,7 @@ export default function ShippingAddressScreen() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
+    fullBox,
     userInfo,
     cart: { shippingAddress },
   } = state;
@@ -33,6 +34,7 @@ export default function ShippingAddressScreen() {
           city,
           postalCode,
           country,
+          location: shippingAddress.location,
         },
       });
       localStorage.setItem(
@@ -43,10 +45,15 @@ export default function ShippingAddressScreen() {
           city,
           postalCode,
           country,
+          location: shippingAddress.location,
         })
       );
       navigate('/payment');
     };
+
+    useEffect(() => {
+      ctxDispatch({ type: 'SET_FULLBOX_OFF' });
+    },[ctxDispatch, fullBox]);
   return <div>
       <Helmet>
         <title> 收 件 地 址 </title>
@@ -55,7 +62,7 @@ export default function ShippingAddressScreen() {
       <div className='container small-container'>
       <h1 className='my-3'> 收 件 地 址 </h1>
       <Form onSubmit={submitHandler}>
-      <Form.Group className='mb-3' controId='fullName'>
+      <Form.Group className='mb-3' controlId='fullName'>
         <Form.Label>姓名</Form.Label>
         <Form.Control 
         value={fullName}
@@ -95,6 +102,24 @@ export default function ShippingAddressScreen() {
           required
           />
         </Form.Group>
+        <div className='mb-3'>
+          <Button
+            id="chooseOnMap"
+            type="button"
+            variant='outline-secondary'
+            onClick={() => navigate('/map')}
+          >
+            選擇居住位置
+          </Button>
+          {shippingAddress.location && shippingAddress.location.lat ?(
+            <div>
+              緯度 : {shippingAddress.location.lat}
+              經度 : {shippingAddress.location.lng}
+            </div>
+          ) : (
+            <div>查 無 此 地 </div>
+          )}
+        </div>
         <div className='mb-3'>
           <Button type='submit' variant="outline-secondary"> 結 帳 </Button>
         </div>

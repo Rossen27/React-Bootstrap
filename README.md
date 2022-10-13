@@ -205,7 +205,17 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 2. 在輸入框中顯示產品信息
 3. 實現後端 API
 4. 處理編輯點擊
-## 46. 刪除使用者
+## 49. 刪除使用者
 1. 增加刪除按鈕
 2. 處理點擊動作
 3. 在後端導入刪除 API
+## 50.在 Google 地圖內選擇地址
+1. 創建地圖憑據
+2. 使用 Google API Key 更新 .env 文件
+3. 創建 API 將 Google API 發送至前端
+4. 創建地圖頁面
+5. 連接 Google API
+6. 獲取使用者位置
+7. install @react-google-maps/api
+8. 在購物頁面使用它
+9. 將地圖應用至結帳頁面
