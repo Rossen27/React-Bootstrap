@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
 
 const orderRouter = express.Router();
 
@@ -32,7 +32,7 @@ orderRouter.post(
       user: req.user._id,
     });
     const order = await newOrder.save();
-    res.status(201).send({ message: 'New Order Created', order });
+    res.status(201).send({ message: '以建立訂單', order });
   })
 );
 /* TODO : 圖表資料庫 */
@@ -95,7 +95,7 @@ orderRouter.get(
     if (order) {
       res.send(order);
     } else {
-      res.status(404).send({ message: 'Order Not Found' });
+      res.status(404).send({ message: '查無此訂單' });
     }
   })
 );
@@ -119,7 +119,10 @@ orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name',
+    );
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
@@ -130,9 +133,25 @@ orderRouter.put(
         email_address: req.body.email_address,
       };
       const updatedOrder = await order.save();
-      res.send({ message: 'Order Paid', order: updatedOrder });
+      mailgun()
+      .messages()
+      .send({
+        from: 'Test <rossen@mg.yourdomain.com>',
+        to: `${order.user.name} <${order.user.email}>`,
+        subject: `訂單編號 ${order._id}`,
+        html: payOrderEmailTemplate(order),
+      },
+        (error, body) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(body);
+          }
+        }
+      );
+      res.send({ message: '訂單已付款', order: updatedOrder });
     } else {
-      res.status(404).send({ message: 'Order Not Found' });
+      res.status(404).send({ message: '查無此訂單' });
     }
   })
 );

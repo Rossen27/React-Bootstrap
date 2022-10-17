@@ -219,3 +219,10 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 7. install @react-google-maps/api
 8. 在購物頁面使用它
 9. 將地圖應用至結帳頁面
+## 51. 透過 MailGun 發送墊子郵件訂單
+1. 創建 MailGun 帳戶
+2. 將網頁以及驗證功能添加至 MailGun
+3. 安裝 MailGun.js backend : npm i mailgun-js
+4. 在.env文件中設定 API
+5. 在 OrderRouter 中更改付款順序
+6. 發送電子郵件訂單收據
