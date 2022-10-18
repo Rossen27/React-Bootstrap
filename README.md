@@ -230,3 +230,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 1. 創建評分系統
 2. 送出系統資訊
 3. 串連後端 API 
+## 53. 增加商品細節照
+1. 將細節照片增加至商品頁面
+2. 在編輯頁面增加細節照上傳功能
+3. 顯示出細節照片

@@ -1,6 +1,11 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { LoadScript, GoogleMap, StandaloneSearchBox, Marker, } from '@react-google-maps/api';
+import {
+  LoadScript,
+  GoogleMap,
+  StandaloneSearchBox,
+  Marker,
+} from '@react-google-maps/api';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import Button from 'react-bootstrap/Button';
@@ -20,6 +25,7 @@ export default function MapScreen() {
   const mapRef = useRef(null);
   const placeRef = useRef(null);
   const markerRef = useRef(null);
+
 
   const getUserCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -50,7 +56,7 @@ export default function MapScreen() {
     ctxDispatch({
       type: 'SET_FULLBOX_ON',
     });
-  }, [ctxDispatch]);
+  }, [ctxDispatch, userInfo.token]);
 
   const onLoad = (map) => {
     mapRef.current = map;

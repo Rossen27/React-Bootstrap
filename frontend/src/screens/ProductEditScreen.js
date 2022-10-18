@@ -5,11 +5,13 @@ import axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
+
 
 
 const reducer = (state, action) => {
@@ -53,6 +55,7 @@ export default function ProductEditScreen() {
   const [slug, setSlug] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
@@ -67,6 +70,7 @@ export default function ProductEditScreen() {
         setSlug(data.slug);
         setPrice(data.price);
         setImage(data.image);
+        setImages(data.images);
         setCategory(data.category);
         setCountInStock(data.countInStock);
         setBrand(data.brand);
@@ -94,6 +98,7 @@ export default function ProductEditScreen() {
           slug,
           price,
           image,
+          images,
           category,
           brand,
           countInStock,
@@ -113,7 +118,7 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPDATE_FAIL' });
     }
   };
-  const uploadFileHandler = async (e) => {
+  const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('file', file);
@@ -126,12 +131,20 @@ export default function ProductEditScreen() {
         },
       });
       dispatch({ type: 'UPLOAD_SUCCESS' });
-      toast.success('上傳成功 ! ');
-      setImage(data.secure_url);
+      if (forImages) {
+        setImages([...images, data.secure_url]);
+      }else {
+        setImage(data.secure_url);
+      }
+      toast.success('商品照已更新完成');
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
+  };
+  const deleteFileHandler = async (fileName) => {
+    setImages(images.filter((x) => x !== fileName));
+    toast.success('細節照片已更新完成');
   };
   return (
   <Container className="small-container">
@@ -181,8 +194,31 @@ export default function ProductEditScreen() {
         <Form.Group className='mb-3' controlId='imageFile'>
           <Form.Label>上 傳 新 圖 片</Form.Label>
           <Form.Control type="file" onChange={uploadFileHandler} />
-          <dr/>{loadingUpload && <LoadingBox></LoadingBox>}
+          {loadingUpload && <LoadingBox></LoadingBox>}
         </Form.Group>
+        <Form.Group className='mb-3' controlId='additionalImage'>
+          <Form.Label>上 傳 細 節 照</Form.Label>
+          {images.length === 0 && <MessageBox>無 照 片</MessageBox>}
+          <ListGroup variant="flush">
+            {images.map((x) => (
+              <ListGroup.Item key={x}>
+                {x}
+                <Button variant='outline-dark primary' onClick={() => deleteFileHandler(x)}>
+                  <i className='fa fa-times-circle'></i>
+                </Button>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='additionalImageFile'>
+          <Form.Label>更 新 細 節 照 片</Form.Label>
+          <Form.Control
+          type='file'
+          onChange={(e) => uploadFileHandler(e, true)}
+          />
+          {loadingUpload && <LoadingBox></LoadingBox>}
+        </Form.Group>
+
         <Form.Group className='mb-3' controlId='category'>
           <Form.Label> 商 品 分 類 </Form.Label>
           <Form.Control

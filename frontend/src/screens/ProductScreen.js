@@ -17,6 +17,7 @@ import { Store } from '../Store';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
 
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'REFRESH_PRODUCT':
@@ -44,6 +45,8 @@ function ProductScreen() {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+
+  const [selectedImage, setSelectedImage] = useState('');
 
   const navigate = useNavigate();
   const params = useParams();
@@ -124,7 +127,7 @@ function ProductScreen() {
         <Col md={6}>
           <img
             className='img-large'
-            src={product.image}
+            src={selectedImage || product.image}
             alt={product.name}
           />
         </Col>
@@ -143,6 +146,30 @@ function ProductScreen() {
               ></Rating>
             </ListGroup.Item>
             <ListGroup.Item>售價 : ${product.price}</ListGroup.Item>
+            <ListGroup.Item>
+              <Row xs={1} md={2} className='g-2'>
+                {
+                  [product.image, ...product.images].map((x) => (
+                    <Col key={x}>
+                      <Card>
+                        <Button
+                        className='thumbbnail'
+                        type='button'
+                        variant='outline-dark primary'
+                        onClick={() => setSelectedImage(x)}
+                        >
+                          <Card.Img
+                          variant='top'
+                          src={x}
+                          alt="product"
+                          ></Card.Img>
+                        </Button>
+                      </Card>
+                    </Col>
+                  ))
+                }
+              </Row>
+            </ListGroup.Item>
             <ListGroup.Item>
               產品描述 :
               <p>{product.description}</p>

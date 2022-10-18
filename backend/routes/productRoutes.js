@@ -41,14 +41,15 @@ productRouter.put(
       product.slug = req.body.slug;
       product.price = req.body.price;
       product.image = req.body.image;
+      product.images = req.body.images;
       product.category = req.body.category;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
       await product.save();
-      res.send({ message: 'Product Updated' });
+      res.send({ message: '照片已更新' });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: '照片更新失敗' });
     }
   })
 );
@@ -61,9 +62,9 @@ productRouter.delete(
     const product = await Product.findById(req.params.id);
     if (product) {
       await product.remove();
-      res.send({ message: 'Product Deleted' });
+      res.send({ message: '商品已刪除' });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: '商品刪除失敗' });
     }
   })
 );
@@ -211,7 +212,7 @@ productRouter.get('/slug/:slug', async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product Not Found' });
+    res.status(404).send({ message: '查無此商品' });
   }
 });
 productRouter.get('/:id', async (req, res) => {
@@ -219,7 +220,7 @@ productRouter.get('/:id', async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product Not Found' });
+    res.status(404).send({ message: '查無此商品' });
   }
 });
 export default productRouter;

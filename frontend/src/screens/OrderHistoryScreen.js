@@ -52,9 +52,9 @@ export default function OrderHistoryScreen() {
   return (
     <div>
       <Helmet>
-        <title>Order History</title>
+        <title>歷 史 訂 單</title>
       </Helmet>
-      <h1>Order History</h1>
+      <h1>歷 史 訂 單</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
