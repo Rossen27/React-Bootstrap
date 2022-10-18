@@ -226,3 +226,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 4. 在.env文件中設定 API
 5. 在 OrderRouter 中更改付款順序
 6. 發送電子郵件訂單收據
+## 52. 評分系統
+1. 創建評分系統
+2. 送出系統資訊
+3. 串連後端 API 
