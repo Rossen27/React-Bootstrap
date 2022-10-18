@@ -217,7 +217,7 @@ function ProductScreen() {
                   <option value="2">2- 還行</option>
                   <option value="3">3- 尚可</option>
                   <option value="4">4- 很好</option>
-                  <option value="5">5- 非常酐</option>
+                  <option value="5">5- 非常好</option>
                 </Form.Select>
               </Form.Group>
               <FloatingLabel
