@@ -7,6 +7,8 @@ Lessons
 ## 2. 安裝工具
 https://git-scm.com/downloads
 https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+ps 版本不相容時使用 npm config set legacy-peer-deps true
+再使用 npm i
 
 ## 3. 創建 React 專案
 ## 4. 創建 Git Repository
